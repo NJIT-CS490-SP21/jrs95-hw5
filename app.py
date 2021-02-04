@@ -21,4 +21,13 @@ auth_response_data = auth_response.json()
 
 # save the access token
 access_token = auth_response_data['access_token']
-print(access_token)
+#print(access_token)
+
+data = {'Authorization': 'Bearer {token}'.format(token=access_token)}
+
+recent = requests.get('https://api.spotify.com/v1/browse/new-releases', headers=data)
+recent = recent.json()
+#print(recent)
+
+for i in range(10):
+    print(i+1, ":", recent['albums']['items'][i]['name']  )
